@@ -39,6 +39,8 @@ with open("chevrolet_file.txt", 'r', encoding='utf-8') as txtfile:
     for i, line in enumerate(txtreader, 1):
         if 5 <= i <= 10:
             print(i, line)
+            
+# new line
 
 import json
 
