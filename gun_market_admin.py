@@ -28,14 +28,16 @@ for items in all_guns:
     years.append(items[4])
     calibrs.append(items[5])
 
-
 admin_menu = ("Просмотр всего оружия", "Добавить оружие", "Удалить оружие по id")
 log_and_pass = (102103, "Anton")
+# password_admin = 102103
+# login_admin = "Anton"
+
 password = 0
 
 while password < 3:
     try:
-        authorize = str(input("Войти в личный кабинет?(yes/no): "))
+        authorize = input("Войти в личный кабинет?(yes/no): ")
         if authorize == "yes":
             pass
         elif authorize == "no":
@@ -43,36 +45,38 @@ while password < 3:
         else:
             print("Вы ввели некорректные данные. попробуйте еще раз.")
             continue
-        login_input = str(input("Введите свой логин(Anton): "))
+        login_input = input("Введите свой логин(Anton): ")
         password_input = int(input("Введите пароль для входа в режим разработчика"
                                    "(102103): "))
+        # if login == login_admin and password == password_admin:
         if login_input in log_and_pass:
             if password_input in log_and_pass:
                 print("Вы вошли в режим разработчика.")
                 print(f"Список доступных полномочий: {admin_menu} \n")
                 while True:
-                    admin_input = str(input("Хотите что либо изменить?(yes/no): "))
+                    admin_input = input("Хотите что либо изменить?(yes/no): ")
                     if admin_input == "yes":
-                        menu_input = str(
-                            input("Просмотр всего оружия - 1, Добавить оружие - 2, Удалить оружие по id - 3: "))
-                        if menu_input == str("1"):
+                        menu_input = input("Просмотр всего оружия - 1, Добавить оружие - 2, Удалить оружие по id - 3: ")
+                        if menu_input == "1":
                             for line in all_guns:
                                 print(line)
-                        elif menu_input == str("2"):
+                        elif menu_input == "2":
+                            """add new gun to menu"""
                             new_gun = ""
                             count1 = 0
                             while count1 < 1:
                                 try:
-                                    add_id = int(input("Введите id: "))
-                                    if add_id in ids:
-                                        print("Такой id уже есть в системе. Выберите другой.")
-                                        continue
-                                    add_gun = str(input("Введите название оружия: "))
+                                    add_id = len(ids) + 1
+                                    # add_id = int(input("Введите id: "))
+                                    # if add_id in ids:
+                                    #     print("Такой id уже есть в системе. Выберите другой.")
+                                    #     continue
+                                    add_gun = input("Введите название оружия: ")
                                     if add_gun in guns:
                                         print("Такое оружие уже есть в системе. Выберите другое.")
                                         continue
-                                    add_author = str(input("Введите автора: "))
-                                    add_country = str(input("Введите страну производителя: "))
+                                    add_author = input("Введите автора: ")
+                                    add_country = input("Введите страну производителя: ")
                                     add_year = int(input("Введите год выпуска: "))
                                     add_calibr = float(input("Введите калибр оружия: "))
                                 except ValueError as verr:
@@ -81,11 +85,14 @@ while password < 3:
                                     count1 = 0
                                     continue
                                 count1 = 1
-                                new_gun = str(add_id) + ", " + str(add_gun) + ", " + str(add_author) + ", " + str(
-                                    add_country) + \
-                                          ", " + str(add_year) + ", " + str(add_calibr) + "\n"
+                                # new_gun = str(add_id) + ", " + str(add_gun) + ", " + str(add_author) + ", " + str(
+                                #     add_country) + \
+                                #           ", " + str(add_year) + ", " + str(add_calibr) + "\n"
+                                new_gun = \
+                                    f"{add_id}, {add_gun}, {add_author}, {add_country}, {add_year}, {add_calibr}\n"
                                 with open("guns.txt", 'a', encoding="windows-1251") as gunstxt:
                                     gunstxt.write(str(new_gun))
+                                # all_guns.append((add_id, add_gun,...))
                                 ids.append(add_id)
                                 guns.append(add_gun)
                                 authors.append(add_author)
@@ -105,7 +112,8 @@ while password < 3:
                                         items[5] = float(items[5])
                                     count = 1
                             print("Оружие было добавлено.")
-                        elif menu_input == str("3"):
+                        elif menu_input == "3":
+                            """delete gun from menu"""
                             for line in all_guns:
                                 print(line)
                             print()
